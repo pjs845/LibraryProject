@@ -1,0 +1,24 @@
+
+ table {
+  width: 100%;
+  border-top: 1px solid #663300;
+  border-collapse: collapse;
+  border-width:2px;
+	}
+th{
+	background-color: #F4F4F4;
+}
+ th, td {
+ 	border-bottom: 1px solid #dddddd;
+ 	border-left: 1px solid #dddddd;
+ 	padding: 10px;
+}
+	th:first-child, td:first-child {
+ 	border-left: none;
+	}
+.tb_top_fixed{
+	background-color: #99CC99;
+} 	 	
+.top{
+	text-align:center;
+}
