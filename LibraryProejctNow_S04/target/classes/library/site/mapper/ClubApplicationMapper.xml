@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="library.site.mapper.ClubApplicationMapper">
+	<insert id="application" parameterType="ClubApplication">
+		insert into club_application values(club_application_seq.nextval, #{ccnum}, #{mem_num}, 1, SYSDATE)
+	</insert>
+	<select id="personStatus" parameterType="long" resultType="int">
+		select count(*) from club_application where ccnum = #{ccnum}
+	</select>
+	
+	<select id="myApplication" parameterType="long" resultType="ClubJoinVO">
+		select * from club_application ca left join club_calendar cca on ca.ccnum=cca.ccnum where ca.mem_num = #{mem_num}
+	</select>
+	
+	
+	
+</mapper>
