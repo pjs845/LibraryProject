@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="library.site.mapper.ClubReviewMapper">
+	<select id="reviewList" resultType="ClubReview" parameterType="long">
+		select cr.cr_num, cc.ccnum, mu.mem_name, cr.cr_content, cr.cr_rating, cr.cr_date from club_calendar cc left join club_review cr on cc.ccnum=cr.ccnum left join member mu on cr.mem_num=mu.mem_num where cc.ccnum = #{ccnum} order by cr.cr_num desc
+	</select>
+	<insert id="insertReview" parameterType="ClubReview">
+		insert into club_review values(club_review_seq.nextval, #{ccnum}, #{mem_num}, #{cr_content}, #{cr_rating}, CURRENT_DATE)
+	</insert>
+	
+	<delete id="deleteReview" parameterType="long">
+		delete club_review where cr_num = #{cr_num}
+	</delete>
+	
+	
+	<!-- 리뷰 개수 -->
+	<select id="totalReview" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum}
+	</select>
+	<!-- 리뷰 별점 총합 -->
+	<select id="reviewSum" parameterType="long" resultType="int">
+		select NVL(sum(cr_rating),0) from club_review where ccnum = #{ccnum}
+	</select>
+	
+	<!-- 각 별점 -->
+	<select id="reviewNumOne" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum} and cr_rating = 1 
+	</select>
+	<select id="reviewNumTwo" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum} and cr_rating = 2
+	</select>
+	<select id="reviewNumThree" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum} and cr_rating = 3
+	</select>
+	<select id="reviewNumFour" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum} and cr_rating = 4
+	</select>
+	<select id="reviewNumFive" parameterType="long" resultType="int">
+		select count(*) from club_review where ccnum = #{ccnum} and cr_rating = 5
+	</select>
+	
+</mapper>
